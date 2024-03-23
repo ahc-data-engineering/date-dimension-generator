@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "date-table"
+version = "0.1.0"
+description = ""
+authors = ["Arjan Hulshoff <arjan.hulshoff@ah-consultancy.net>"]
+readme = "README.md"
+packages = [{include = "date_table"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+holidays = "^0.44"
+sqlalchemy = "^2.0.28"
+sqlalchemy-utils = "^0.41.1"
+psycopg2-binary = "^2.9.9"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
