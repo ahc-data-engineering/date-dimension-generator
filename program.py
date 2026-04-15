@@ -50,6 +50,7 @@ class DateTable(Base):
     week_id = mapped_column(String, nullable=False)
     year = mapped_column(Integer, nullable=False)
     is_business_day = mapped_column(Boolean, nullable=False)
+    is_sunday = mapped_column(Boolean, nullable=False)
     is_first_day_of_month = mapped_column(Boolean, nullable=False)
     is_last_day_of_month = mapped_column(Boolean, nullable=False)
     days_in_month = mapped_column(Integer, nullable=False)
@@ -58,9 +59,10 @@ class DateTable(Base):
     fiscal_quarter = mapped_column(Integer, nullable=False)
     fiscal_period = mapped_column(Integer, nullable=False)
     week_of_month = mapped_column(Integer, nullable=False)
-    islamic_year = mapped_column(Integer, nullable=False)
-    islamic_month = mapped_column(Integer, nullable=False)
-    islamic_day = mapped_column(Integer, nullable=False)
+    islamic_year = mapped_column(Integer, nullable=True)
+    islamic_month = mapped_column(Integer, nullable=True)
+    islamic_day = mapped_column(Integer, nullable=True)
+    is_jumuah = mapped_column(Boolean, nullable=False)
     chinese_year = mapped_column(Integer, nullable=False)
     chinese_month = mapped_column(Integer, nullable=False)
     chinese_day = mapped_column(Integer, nullable=False)
@@ -68,6 +70,7 @@ class DateTable(Base):
     hebrew_year = mapped_column(Integer, nullable=False)
     hebrew_month = mapped_column(Integer, nullable=False)
     hebrew_day = mapped_column(Integer, nullable=False)
+    is_shabbat = mapped_column(Boolean, nullable=False)
     persian_year = mapped_column(Integer, nullable=False)
     persian_month = mapped_column(Integer, nullable=False)
     persian_day = mapped_column(Integer, nullable=False)
@@ -85,9 +88,12 @@ _DATE_PROPS = [k for k, v in vars(DateDimension).items() if isinstance(v, proper
 
 
 def get_db(database_url: str) -> Session:
-    engine = create_engine(
-        database_url, pool_size=20, max_overflow=0, pool_recycle=3600, pool_timeout=60
-    )
+    if database_url.startswith("sqlite"):
+        engine = create_engine(database_url)
+    else:
+        engine = create_engine(
+            database_url, pool_size=20, max_overflow=0, pool_recycle=3600, pool_timeout=60
+        )
     if not database_exists(engine.url):
         create_database(engine.url)
 
@@ -119,12 +125,16 @@ def main(database_url: str, startdate: date, enddate: date):
 
 if __name__ == "__main__":
     database_url = input(
-        "Provide the SQLAlchemy connection string (e.g.: sqlite:///date_dimension.db): "
-    )
+        "Provide the SQLAlchemy connection string [sqlite:///date_dimension.db]: "
+    ).strip() or "sqlite:///date_dimension.db"
     startdate = datetime.strptime(
-        input("Enter start date (yyyy-mm-dd): "), "%Y-%m-%d"
+        input("Enter start date (yyyy-mm-dd) [1924-08-01]: ").strip() or "1924-08-01",
+        "%Y-%m-%d",
     ).date()
     enddate = datetime.strptime(
-        input("Enter end date (yyyy-mm-dd): "), "%Y-%m-%d"
+        input("Enter end date (yyyy-mm-dd) [2077-11-17]: ").strip() or "2077-11-17",
+        "%Y-%m-%d",
     ).date()
+    if enddate <= startdate:
+        raise ValueError("End date must be after start date.")
     main(database_url, startdate, enddate)

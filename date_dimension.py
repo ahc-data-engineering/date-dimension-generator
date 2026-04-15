@@ -99,6 +99,10 @@ class DateDimension:
         return self.d.weekday() in [5, 6]
 
     @property
+    def is_sunday(self) -> bool:
+        return self.d.isoweekday() == 7
+
+    @property
     def is_holiday(self) -> bool:
         return self.d in holidays.country_holidays(country=self.c, years=self.d.year, language=self.l)
 
@@ -164,7 +168,10 @@ class DateDimension:
 
     @cached_property
     def _hijri(self):
-        return Gregorian(self.d.year, self.d.month, self.d.day).to_hijri()
+        try:
+            return Gregorian(self.d.year, self.d.month, self.d.day).to_hijri()
+        except OverflowError:
+            return None
 
     @cached_property
     def _lunar(self):
@@ -179,16 +186,20 @@ class DateDimension:
         return JalaliDate.fromgregorian(day=self.d.day, month=self.d.month, year=self.d.year)
 
     @property
-    def islamic_year(self) -> int:
-        return self._hijri.year
+    def islamic_year(self) -> int | None:
+        return self._hijri.year if self._hijri else None
 
     @property
-    def islamic_month(self) -> int:
-        return self._hijri.month
+    def islamic_month(self) -> int | None:
+        return self._hijri.month if self._hijri else None
 
     @property
-    def islamic_day(self) -> int:
-        return self._hijri.day
+    def islamic_day(self) -> int | None:
+        return self._hijri.day if self._hijri else None
+
+    @property
+    def is_jumuah(self) -> bool:
+        return self.d.isoweekday() == 5
 
     @property
     def chinese_year(self) -> int:
@@ -217,6 +228,10 @@ class DateDimension:
     @property
     def hebrew_day(self) -> int:
         return self._hebrew.day
+
+    @property
+    def is_shabbat(self) -> bool:
+        return self.d.isoweekday() == 6
 
     @property
     def persian_year(self) -> int:

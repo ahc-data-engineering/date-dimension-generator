@@ -52,6 +52,9 @@ Generates a fully populated date dimension table (`dim_dates`) in a SQL database
 | Field | Type | Description |
 | --- | --- | --- |
 | `is_business_day` | `bool` | `True` if the date is not a weekend and not a public holiday |
+| `is_sunday` | `bool` | `True` if the date is a Sunday — the Christian/Western day of rest |
+| `is_jumuah` | `bool` | `True` if the date is a Friday — Jumuʿah, the Islamic congregational prayer day |
+| `is_shabbat` | `bool` | `True` if the date is a Saturday — Shabbat, the Jewish day of rest |
 
 ### Fiscal calendar
 
@@ -76,9 +79,9 @@ Powered by the [holidays](https://github.com/vacanza/python-holidays) library. C
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `islamic_year` | `int` | Year in the Hijri (Islamic) calendar |
-| `islamic_month` | `int` | Month in the Hijri calendar (1–12) |
-| `islamic_day` | `int` | Day in the Hijri calendar |
+| `islamic_year` | `int\|null` | Year in the Hijri (Islamic) calendar — `null` outside supported range (1924-08-01 to 2077-11-16) |
+| `islamic_month` | `int\|null` | Month in the Hijri calendar (1–12) — `null` outside supported range |
+| `islamic_day` | `int\|null` | Day in the Hijri calendar — `null` outside supported range |
 | `chinese_year` | `int` | Year in the Chinese lunar calendar |
 | `chinese_month` | `int` | Month in the Chinese lunar calendar |
 | `chinese_day` | `int` | Day in the Chinese lunar calendar |
@@ -136,9 +139,9 @@ The end date is **exclusive** — a range of `2024-01-01` to `2025-01-01` genera
 ### Example
 
 ```text
-Provide the SQLAlchemy connection string: sqlite:///date_dimension.db
-Enter start date (yyyy-mm-dd): 2020-01-01
-Enter end date (yyyy-mm-dd): 2030-01-01
+Provide the SQLAlchemy connection string [sqlite:///date_dimension.db]: 
+Enter start date (yyyy-mm-dd) [1924-08-01]: 
+Enter end date (yyyy-mm-dd) [2077-11-17]: 
 Execution time: 12.345
 ```
 
@@ -181,3 +184,4 @@ uv run pytest
 - The Chinese lunar calendar `chinese_is_leap_month` flag indicates whether the date falls in an intercalary (leap) month.
 - The Julian Day Number follows the standard astronomical definition: JDN 0 = noon, 1 January 4713 BC (proleptic Julian calendar).
 - The `trimester` divides the year into three periods of four months (Jan–Apr, May–Aug, Sep–Dec). This differs from academic trimesters.
+- **Islamic calendar range**: the `islamic_*` fields are `null` outside 1924-08-01 to 2077-11-16. This is a deliberate limitation of the `hijridate` library, which is based on the official Umm al-Qura astronomical tables published by Saudi Arabia. Before 1924, the Hijri calendar was determined by regional moon sighting with no single authoritative record; beyond 2077, the published tables do not yet extend. Other libraries use a purely mathematical approximation that works for any date, but at the cost of accuracy. The default date range is set to match this limitation.
