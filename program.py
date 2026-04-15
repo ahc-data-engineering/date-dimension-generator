@@ -123,18 +123,18 @@ def main(database_url: str, startdate: date, enddate: date):
     print(f"Execution time: {execution_time}")
 
 
+def prompt(message: str, default: str) -> str:
+    return input(f"{message} [{default}]: ").strip() or default
+
+
+def prompt_date(message: str, default: str) -> date:
+    return datetime.strptime(prompt(message, default), "%Y-%m-%d").date()
+
+
 if __name__ == "__main__":
-    database_url = input(
-        "Provide the SQLAlchemy connection string [sqlite:///date_dimension.db]: "
-    ).strip() or "sqlite:///date_dimension.db"
-    startdate = datetime.strptime(
-        input("Enter start date (yyyy-mm-dd) [1924-08-01]: ").strip() or "1924-08-01",
-        "%Y-%m-%d",
-    ).date()
-    enddate = datetime.strptime(
-        input("Enter end date (yyyy-mm-dd) [2077-11-17]: ").strip() or "2077-11-17",
-        "%Y-%m-%d",
-    ).date()
+    database_url = prompt("Provide the SQLAlchemy connection string", "sqlite:///date_dimension.db")
+    startdate = prompt_date("Enter start date (yyyy-mm-dd)", "1924-08-01")
+    enddate = prompt_date("Enter end date (yyyy-mm-dd)", "2077-11-17")
     if enddate <= startdate:
         raise ValueError("End date must be after start date.")
     main(database_url, startdate, enddate)
