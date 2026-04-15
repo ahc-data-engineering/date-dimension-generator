@@ -32,14 +32,19 @@ class TestDateTime():
                 "month_name": "December",
                 "quarter": 4,
                 "quarter_id": "2024Q4",
-                "season": "Winter",
                 "semester": 2,
                 "semester_id": "2024S2",
                 "trimester": 3,
                 "trimester_id": "2024T3",
                 "week": 52,
                 "week_id": "2024W52",
-                "year": 2024
+                "year": 2024,
+                "islamic_year": 1446, "islamic_month": 6, "islamic_day": 24,
+                "chinese_year": 2024, "chinese_month": 11, "chinese_day": 25, "chinese_is_leap_month": False,
+                "hebrew_year": 5785, "hebrew_month": 9, "hebrew_day": 24,
+                "persian_year": 1403, "persian_month": 10, "persian_day": 5,
+                "julian_day_number": 2460670,
+                "cyclic_encoding": {"sine": -0.1028209971373608, "cosine": 0.9946998756145891}
             }),
         (1978, 6, 30, {
                 "iso_week_date": "197826.5",
@@ -71,12 +76,17 @@ class TestDateTime():
                 "quarter_id": "1978Q2",
                 "semester": 1,
                 "semester_id": "1978S1",
-                "season": "Summer",
                 "trimester": 2,
                 "trimester_id": "1978T2",
                 "week": 26,
                 "week_id": "1978W26",
-                "year": 1978
+                "year": 1978,
+                "islamic_year": 1398, "islamic_month": 7, "islamic_day": 25,
+                "chinese_year": 1978, "chinese_month": 5, "chinese_day": 25, "chinese_is_leap_month": False,
+                "hebrew_year": 5738, "hebrew_month": 3, "hebrew_day": 25,
+                "persian_year": 1357, "persian_month": 4, "persian_day": 9,
+                "julian_day_number": 2443690,
+                "cyclic_encoding": {"sine": 0.02581844022713308, "cosine": -0.9996666485105112}
             }),
         (2012, 3, 24, {
                 "iso_week_date": "201212.6",
@@ -108,12 +118,17 @@ class TestDateTime():
                 "quarter_id": "2012Q1",
                 "semester": 1,
                 "semester_id": "2012S1",
-                "season": "Spring",
                 "trimester": 1,
                 "trimester_id": "2012T1",
                 "week": 12,
                 "week_id": "2012W12",
-                "year": 2012
+                "year": 2012,
+                "islamic_year": 1433, "islamic_month": 5, "islamic_day": 1,
+                "chinese_year": 2012, "chinese_month": 3, "chinese_day": 3, "chinese_is_leap_month": False,
+                "hebrew_year": 5772, "hebrew_month": 1, "hebrew_day": 1,
+                "persian_year": 1391, "persian_month": 1, "persian_day": 5,
+                "julian_day_number": 2456011,
+                "cyclic_encoding": {"sine": 0.9917226741361015, "cosine": 0.12839835514655099}
             }),
         (1996, 2, 29, {
                 "iso_week_date": "199609.4",
@@ -145,12 +160,17 @@ class TestDateTime():
                 "quarter_id": "1996Q1",
                 "semester": 1,
                 "semester_id": "1996S1",
-                "season": "Winter",
                 "trimester": 1,
                 "trimester_id": "1996T1",
                 "week": 9,
                 "week_id": "1996W09",
-                "year": 1996
+                "year": 1996,
+                "islamic_year": 1416, "islamic_month": 10, "islamic_day": 11,
+                "chinese_year": 1996, "chinese_month": 1, "chinese_day": 11, "chinese_is_leap_month": False,
+                "hebrew_year": 5756, "hebrew_month": 12, "hebrew_day": 9,
+                "persian_year": 1374, "persian_month": 12, "persian_day": 10,
+                "julian_day_number": 2450143,
+                "cyclic_encoding": {"sine": 0.8573146280763322, "cosine": 0.5147928015098309}
             }),
         (2008, 1, 1, {
                 "iso_week_date": "200801.2",
@@ -182,12 +202,17 @@ class TestDateTime():
                 "quarter_id": "2008Q1",
                 "semester": 1,
                 "semester_id": "2008S1",
-                "season": "Winter",
                 "trimester": 1,
                 "trimester_id": "2008T1",
                 "week": 1,
                 "week_id": "2008W01",
-                "year": 2008
+                "year": 2008,
+                "islamic_year": 1428, "islamic_month": 12, "islamic_day": 22,
+                "chinese_year": 2007, "chinese_month": 11, "chinese_day": 23, "chinese_is_leap_month": False,
+                "hebrew_year": 5768, "hebrew_month": 10, "hebrew_day": 23,
+                "persian_year": 1386, "persian_month": 10, "persian_day": 11,
+                "julian_day_number": 2454467,
+                "cyclic_encoding": {"sine": 0.01716632975470737, "cosine": 0.9998526477050269}
             }),
         (2010, 1, 1, {
                 "iso_week_date": "200953.5",
@@ -219,12 +244,17 @@ class TestDateTime():
                 "quarter_id": "2010Q1",
                 "semester": 1,
                 "semester_id": "2010S1",
-                "season": "Winter",
                 "trimester": 1,
                 "trimester_id": "2010T1",
                 "week": 53,
                 "week_id": "2009W53",
-                "year": 2010
+                "year": 2010,
+                "islamic_year": 1431, "islamic_month": 1, "islamic_day": 15,
+                "chinese_year": 2009, "chinese_month": 11, "chinese_day": 17, "chinese_is_leap_month": False,
+                "hebrew_year": 5770, "hebrew_month": 10, "hebrew_day": 15,
+                "persian_year": 1388, "persian_month": 10, "persian_day": 11,
+                "julian_day_number": 2455198,
+                "cyclic_encoding": {"sine": 0.017213356155834685, "cosine": 0.9998518392091162}
             })
     ])
     def test_pass(self, year, month, day, expected):

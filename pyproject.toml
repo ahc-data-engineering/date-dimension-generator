@@ -1,22 +1,27 @@
-[tool.poetry]
+[project]
 name = "date-table"
 version = "0.1.0"
 description = ""
-authors = ["Arjan Hulshoff <arjan.hulshoff@ah-consultancy.net>"]
-readme = "README.md"
-packages = [{include = "date_table"}]
+requires-python = ">=3.10"
+dependencies = [
+    "holidays>=0.44",
+    "sqlalchemy>=2.0.28",
+    "sqlalchemy-utils>=0.41.1",
+    "psycopg2-binary>=2.9.9",
+    "hijri-converter>=2.3.2.post1",
+    "lunardate>=0.2.2",
+    "pyluach>=2.3.0",
+    "jdatetime>=5.2.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-holidays = "^0.44"
-sqlalchemy = "^2.0.28"
-sqlalchemy-utils = "^0.41.1"
-psycopg2-binary = "^2.9.9"
+[dependency-groups]
+dev = [
+    "pytest>=8.1.1",
+]
 
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.1.1"
+[tool.hatch.build.targets.wheel]
+packages = ["date_dimension.py", "program.py"]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
