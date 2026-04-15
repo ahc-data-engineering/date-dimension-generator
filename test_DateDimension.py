@@ -48,7 +48,11 @@ class TestDateTime():
                 "hebrew_year": 5785, "hebrew_month": 9, "hebrew_day": 24,
                 "persian_year": 1403, "persian_month": 10, "persian_day": 5,
                 "julian_day_number": 2460670,
-                "cyclic_encoding": {"sine": -0.1028209971373608, "cosine": 0.9946998756145891}
+                "weeks_in_year": 52, "days_since_epoch": 20082, "year_fraction": 0.9836065573770492,
+                "cyclic_day_of_year": {"sine": -0.1028209971373608, "cosine": 0.9946998756145891},
+                "cyclic_day_of_week": {"sine": 0.43388373911755823, "cosine": -0.900968867902419},
+                "cyclic_month": {"sine": -2.4492935982947064e-16, "cosine": 1.0},
+                "cyclic_week_of_year": {"sine": 6.432490598706546e-16, "cosine": 1.0}
             }),
         (1978, 6, 30, {
                 "iso_week_date": "197826.5",
@@ -94,7 +98,11 @@ class TestDateTime():
                 "hebrew_year": 5738, "hebrew_month": 3, "hebrew_day": 25,
                 "persian_year": 1357, "persian_month": 4, "persian_day": 9,
                 "julian_day_number": 2443690,
-                "cyclic_encoding": {"sine": 0.02581844022713308, "cosine": -0.9996666485105112}
+                "weeks_in_year": 52, "days_since_epoch": 3102, "year_fraction": 0.4958904109589041,
+                "cyclic_day_of_year": {"sine": 0.02581844022713308, "cosine": -0.9996666485105112},
+                "cyclic_day_of_week": {"sine": -0.9749279121818236, "cosine": -0.2225209339563146},
+                "cyclic_month": {"sine": 1.2246467991473532e-16, "cosine": -1.0},
+                "cyclic_week_of_year": {"sine": -3.216245299353273e-16, "cosine": -1.0}
             }),
         (2012, 3, 24, {
                 "iso_week_date": "201212.6",
@@ -140,7 +148,11 @@ class TestDateTime():
                 "hebrew_year": 5772, "hebrew_month": 1, "hebrew_day": 1,
                 "persian_year": 1391, "persian_month": 1, "persian_day": 5,
                 "julian_day_number": 2456011,
-                "cyclic_encoding": {"sine": 0.9917226741361015, "cosine": 0.12839835514655099}
+                "weeks_in_year": 52, "days_since_epoch": 15423, "year_fraction": 0.22950819672131148,
+                "cyclic_day_of_year": {"sine": 0.9917226741361015, "cosine": 0.12839835514655099},
+                "cyclic_day_of_week": {"sine": -0.7818314824680299, "cosine": 0.6234898018587334},
+                "cyclic_month": {"sine": 1.0, "cosine": 6.123233995736766e-17},
+                "cyclic_week_of_year": {"sine": 0.992708874098054, "cosine": 0.120536680255323}
             }),
         (1996, 2, 29, {
                 "iso_week_date": "199609.4",
@@ -186,7 +198,11 @@ class TestDateTime():
                 "hebrew_year": 5756, "hebrew_month": 12, "hebrew_day": 9,
                 "persian_year": 1374, "persian_month": 12, "persian_day": 10,
                 "julian_day_number": 2450143,
-                "cyclic_encoding": {"sine": 0.8573146280763322, "cosine": 0.5147928015098309}
+                "weeks_in_year": 52, "days_since_epoch": 9555, "year_fraction": 0.16393442622950818,
+                "cyclic_day_of_year": {"sine": 0.8573146280763322, "cosine": 0.5147928015098309},
+                "cyclic_day_of_week": {"sine": -0.433883739117558, "cosine": -0.9009688679024191},
+                "cyclic_month": {"sine": 0.8660254037844386, "cosine": 0.5000000000000001},
+                "cyclic_week_of_year": {"sine": 0.8854560256532099, "cosine": 0.4647231720437686}
             }),
         (2008, 1, 1, {
                 "iso_week_date": "200801.2",
@@ -232,7 +248,11 @@ class TestDateTime():
                 "hebrew_year": 5768, "hebrew_month": 10, "hebrew_day": 23,
                 "persian_year": 1386, "persian_month": 10, "persian_day": 11,
                 "julian_day_number": 2454467,
-                "cyclic_encoding": {"sine": 0.01716632975470737, "cosine": 0.9998526477050269}
+                "weeks_in_year": 52, "days_since_epoch": 13879, "year_fraction": 0.00273224043715847,
+                "cyclic_day_of_year": {"sine": 0.01716632975470737, "cosine": 0.9998526477050269},
+                "cyclic_day_of_week": {"sine": 0.9749279121818236, "cosine": -0.22252093395631434},
+                "cyclic_month": {"sine": 0.49999999999999994, "cosine": 0.8660254037844387},
+                "cyclic_week_of_year": {"sine": 0.12053668025532305, "cosine": 0.992708874098054}
             }),
         (2010, 1, 1, {
                 "iso_week_date": "200953.5",
@@ -278,7 +298,11 @@ class TestDateTime():
                 "hebrew_year": 5770, "hebrew_month": 10, "hebrew_day": 15,
                 "persian_year": 1388, "persian_month": 10, "persian_day": 11,
                 "julian_day_number": 2455198,
-                "cyclic_encoding": {"sine": 0.017213356155834685, "cosine": 0.9998518392091162}
+                "weeks_in_year": 52, "days_since_epoch": 14610, "year_fraction": 0.0027397260273972603,
+                "cyclic_day_of_year": {"sine": 0.017213356155834685, "cosine": 0.9998518392091162},
+                "cyclic_day_of_week": {"sine": -0.9749279121818236, "cosine": -0.2225209339563146},
+                "cyclic_month": {"sine": 0.49999999999999994, "cosine": 0.8660254037844387},
+                "cyclic_week_of_year": {"sine": 0.12053668025532314, "cosine": 0.992708874098054}
             })
     ])
     def test_pass(self, year, month, day, expected):

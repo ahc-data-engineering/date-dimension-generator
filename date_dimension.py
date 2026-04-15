@@ -274,6 +274,33 @@ class DateDimension:
         return (self.d.day - 1) // 7 + 1
 
     @property
-    def cyclic_encoding(self) -> dict[str, float]:
+    def days_since_epoch(self) -> int:
+        return (self.d - date(1970, 1, 1)).days
+
+    @property
+    def year_fraction(self) -> float:
+        return self.day_of_year / self.days_in_year
+
+    @property
+    def cyclic_day_of_year(self) -> dict[str, float]:
         fx: float = 2 * pi * self.day_of_year / self.days_in_year
+        return {"sine": sin(fx), "cosine": cos(fx)}
+
+    @property
+    def cyclic_day_of_week(self) -> dict[str, float]:
+        fx: float = 2 * pi * self.day_of_week / 7
+        return {"sine": sin(fx), "cosine": cos(fx)}
+
+    @property
+    def cyclic_month(self) -> dict[str, float]:
+        fx: float = 2 * pi * self.month / 12
+        return {"sine": sin(fx), "cosine": cos(fx)}
+
+    @property
+    def weeks_in_year(self) -> int:
+        return date(self.year, 12, 28).isocalendar().week
+
+    @property
+    def cyclic_week_of_year(self) -> dict[str, float]:
+        fx: float = 2 * pi * self.week / self.weeks_in_year
         return {"sine": sin(fx), "cosine": cos(fx)}

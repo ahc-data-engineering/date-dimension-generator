@@ -1,6 +1,6 @@
 from date_dimension import DateDimension
 from datetime import date, timedelta, datetime
-from sqlalchemy import create_engine, Integer, String, Boolean, Date, JSON
+from sqlalchemy import create_engine, Integer, String, Boolean, Date, Float, JSON
 from sqlalchemy.orm import sessionmaker, mapped_column, declarative_base, Session
 from sqlalchemy_utils.functions import database_exists, create_database
 from timeit import timeit
@@ -72,7 +72,13 @@ class DateTable(Base):
     persian_month = mapped_column(Integer, nullable=False)
     persian_day = mapped_column(Integer, nullable=False)
     julian_day_number = mapped_column(Integer, nullable=False)
-    cyclic_encoding = mapped_column(JSON, nullable=False)
+    weeks_in_year = mapped_column(Integer, nullable=False)
+    days_since_epoch = mapped_column(Integer, nullable=False)
+    year_fraction = mapped_column(Float, nullable=False)
+    cyclic_day_of_year = mapped_column(JSON, nullable=False)
+    cyclic_day_of_week = mapped_column(JSON, nullable=False)
+    cyclic_month = mapped_column(JSON, nullable=False)
+    cyclic_week_of_year = mapped_column(JSON, nullable=False)
 
 
 _DATE_PROPS = [k for k, v in vars(DateDimension).items() if isinstance(v, property)]

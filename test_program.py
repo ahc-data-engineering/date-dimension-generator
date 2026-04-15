@@ -60,6 +60,8 @@ class TestStoreDateDimension:
     def test_cyclic_encoding_stored(self, db):
         store_date_dimension(db, date(2024, 1, 1), date(2024, 1, 2))
         row = db.query(DateTable).filter_by(key=20240101).first()
-        assert isinstance(row.cyclic_encoding, dict)
-        assert "sine" in row.cyclic_encoding
-        assert "cosine" in row.cyclic_encoding
+        for field in ("cyclic_day_of_year", "cyclic_day_of_week", "cyclic_month", "cyclic_week_of_year"):
+            enc = getattr(row, field)
+            assert isinstance(enc, dict)
+            assert "sine" in enc
+            assert "cosine" in enc
