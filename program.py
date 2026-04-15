@@ -115,7 +115,7 @@ def store_date_dimension(db: Session, startdate: date, enddate: date) -> None:
 
 def daterange(startdate: date, enddate: date) -> Generator[DateTable, None, None]:
     for n in range(int((enddate - startdate).days)):
-        dd = DateDimension(date=(startdate + timedelta(n)), country="NL", language="en_US")
+        dd = DateDimension(date=(startdate + timedelta(n)), country="NL", language="en_US", fiscal_year_start_month=1)
         yield DateTable(**{k: getattr(dd, k) for k in _DATE_PROPS})
 
 
