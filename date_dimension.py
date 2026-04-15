@@ -8,6 +8,10 @@ from pyluach.dates import HebrewDate
 from jdatetime import date as JalaliDate
 from math import pi, sin, cos
 
+_HEAVENLY_STEMS = ["jiǎ", "yǐ", "bǐng", "dīng", "wù", "jǐ", "gēng", "xīn", "rén", "guǐ"]
+_EARTHLY_BRANCHES = ["zǐ", "chǒu", "yín", "mǎo", "chén", "sì", "wǔ", "wèi", "shēn", "yǒu", "xū", "hài"]
+_ZODIAC_ANIMALS = ["Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig"]
+
 
 class DateDimension:
     d: date
@@ -216,6 +220,22 @@ class DateDimension:
     @property
     def chinese_is_leap_month(self) -> bool:
         return self._lunar.isLeapMonth
+
+    @property
+    def chinese_xun(self) -> int:
+        return (self._lunar.day - 1) // 10 + 1
+
+    @property
+    def chinese_day_stem(self) -> str:
+        return _HEAVENLY_STEMS[(self.julian_day_number + 27) % 10]
+
+    @property
+    def chinese_day_branch(self) -> str:
+        return _EARTHLY_BRANCHES[(self.julian_day_number + 27) % 12]
+
+    @property
+    def chinese_zodiac(self) -> str:
+        return _ZODIAC_ANIMALS[(self._lunar.year - 4) % 12]
 
     @property
     def hebrew_year(self) -> int:

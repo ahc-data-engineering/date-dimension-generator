@@ -86,6 +86,10 @@ Powered by the [holidays](https://github.com/vacanza/python-holidays) library. C
 | `chinese_month` | `int` | Month in the Chinese lunar calendar |
 | `chinese_day` | `int` | Day in the Chinese lunar calendar |
 | `chinese_is_leap_month` | `bool` | `True` if the date falls in an intercalary (leap) month |
+| `chinese_xun` | `int` | 10-day period (旬, xún) within the lunar month — 1 = upper (上旬, days 1–10), 2 = middle (中旬, days 11–20), 3 = lower (下旬, days 21–end) |
+| `chinese_day_stem` | `str` | Heavenly Stem (天干, tiāngān) of the day in romanized pinyin — one of 10: jiǎ, yǐ, bǐng, dīng, wù, jǐ, gēng, xīn, rén, guǐ |
+| `chinese_day_branch` | `str` | Earthly Branch (地支, dìzhī) of the day in romanized pinyin — one of 12: zǐ, chǒu, yín, mǎo, chén, sì, wǔ, wèi, shēn, yǒu, xū, hài |
+| `chinese_zodiac` | `str` | Chinese zodiac animal for the Chinese lunar year — one of: Rat, Ox, Tiger, Rabbit, Dragon, Snake, Horse, Goat, Monkey, Rooster, Dog, Pig |
 | `hebrew_year` | `int` | Year in the Hebrew calendar |
 | `hebrew_month` | `int` | Month in the Hebrew calendar |
 | `hebrew_day` | `int` | Day in the Hebrew calendar |
