@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 from functools import cached_property
+import calendar
 import holidays
 from hijridate.convert import Gregorian
 from lunardate import LunarDate
@@ -12,10 +13,11 @@ class DateDimension:
     d: date
     c: str
 
-    def __init__(self, date: date, country: str = "NL", language: str = "en_US") -> None:
+    def __init__(self, date: date, country: str = "NL", language: str = "en_US", fiscal_year_start_month: int = 1) -> None:
         self.d = date
         self.c = country
         self.l = language
+        self.fysm = fiscal_year_start_month
 
     @property
     def iso_week_date(self) -> str:
@@ -236,7 +238,42 @@ class DateDimension:
         return self.d.day + (153 * m + 2) // 5 + 365 * y + y // 4 - y // 100 + y // 400 - 32045
 
     @property
+    def is_business_day(self) -> bool:
+        return not self.is_weekend and not self.is_holiday
+
+    @property
+    def is_first_day_of_month(self) -> bool:
+        return self.d.day == 1
+
+    @property
+    def days_in_month(self) -> int:
+        return calendar.monthrange(self.d.year, self.d.month)[1]
+
+    @property
+    def is_last_day_of_month(self) -> bool:
+        return self.d.day == self.days_in_month
+
+    @property
+    def days_in_year(self) -> int:
+        return 366 if self.leap_year else 365
+
+    @property
+    def fiscal_year(self) -> int:
+        return self.d.year if self.d.month >= self.fysm else self.d.year - 1
+
+    @property
+    def fiscal_quarter(self) -> int:
+        return (self.fiscal_period - 1) // 3 + 1
+
+    @property
+    def fiscal_period(self) -> int:
+        return (self.d.month - self.fysm) % 12 + 1
+
+    @property
+    def week_of_month(self) -> int:
+        return (self.d.day - 1) // 7 + 1
+
+    @property
     def cyclic_encoding(self) -> dict[str, float]:
-        nbr_of_days: int = 366 if self.leap_year else 365
-        fx: float = 2 * pi * self.day_of_year / nbr_of_days
+        fx: float = 2 * pi * self.day_of_year / self.days_in_year
         return {"sine": sin(fx), "cosine": cos(fx)}
