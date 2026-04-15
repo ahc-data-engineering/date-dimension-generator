@@ -119,7 +119,7 @@ All cyclic fields return `{"sine": float, "cosine": float}`.
 ## Installation
 
 ```bash
-git clone https://github.com/arjan-hulshoff/date-dimension-generator
+git clone https://github.com/ahc-data-engineering/date-dimension-generator
 cd date-dimension-generator
 uv sync
 ```
